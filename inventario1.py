@@ -1,27 +1,37 @@
 '''
 Axel Alberto Meza Mejias C04845
+
+Forked by Ec0dek
 '''
 print('MezaFresh: Tu Supermercado al Alcance'.upper())
 #Librerias
-import datetime 
+from datetime import datetime
 
-#Aqui impromimos la fecha y hora actual del dia
-fecha_hora_actual = datetime.datetime.now()
-print(fecha_hora_actual)
+#Se imprime la fecha actual
+date = datetime.today()
+print(date)
 
-productos = []
+products = {}
+ready = False
 
-ingreso_producto = ''
+# Funcion para añadir productos al diccionario products
+def add_item(key):
+    if key in list(products.keys()):
+        products[key]["Cantidad"] += 1
+    else:
+        products[key] = {"Cantidad": 1}
 
-while ingreso_producto.lower() != 'listo':
 
-    if ingreso_producto:
-        productos.append(ingreso_producto)
-        print(productos)
-
+# instancia
+while not ready:
+    producto = input('Ingrese un nuevo producto o escriba "listo" para terminar: ')
     print('------------------------------------------------------------------')
-    ingreso_producto = input('Ingrese un nuevo producto o escriba listo para terminar: ')
+    
+    if producto.lower() == "listo":
+        ready = True
+    else:
+        add_item(producto.lower())
+        print(products)
 
 print('------------------------------------------------------------------')
-print(f'Los productos ingresados son los siguientes:\n{productos}.\nGracias por su compra.')
-
+print(f'Los productos ingresados son los siguientes:\n{products}.\nGracias por su compra.')
