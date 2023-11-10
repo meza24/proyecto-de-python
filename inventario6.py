@@ -1,26 +1,35 @@
+
+#Forked By Ec0dek
+
 # Librerias
-import datetime
+from datetime import datetime
 
-# Aquí obtenemos la fecha y hora actual del día
-def obtener_fecha_hora_actual():
-    fecha_hora_actual = datetime.datetime.now()
-    return fecha_hora_actual
 
-'''
-    Esta clase servirá para trabajar con todos los métodos que ocupará 
-    un sistema de facturas de una tienda de Super Mercado
-'''
-class Factura():
-    '''
-    Crearemos un método constructor que tenga como atributos de una factura, como fecha
-    y nombre del supermercado. El título se predefinirá como "MEZAFRESH" si no se proporciona.
-    '''
-    def __init__(self, fecha, titulo="MEZAFRESH"):
+#Definimos el nombre del mercado como constante
+SUPER_NOMBRE = "MEZAFRESH"
+
+
+#Creamos la clase para crear una factura
+class Factura:
+    def __init__(self, titulo, fecha, productos:dict) -> None:
         self.titulo = titulo
         self.fecha = fecha
+        self.productos = productos
+        
+    def Create(self):
+        product_list = ""
+        for producto, cantidad in self.productos.items():
+            product_list += f"{producto} x{cantidad["Cantidad"]}\n"
+            
+        return f"{self.titulo}\n{self.fecha}\n\n{product_list}"
+        
+        
+# lista de productos con el formato del "inventario1.py"
+productos = {"Manzana": {"Cantidad": 1}}
 
-# Aquí vamos a instanciar nuestros objetos
-if __name__ == '__main__':
-    fecha = obtener_fecha_hora_actual()
-    factura1 = Factura(fecha)  # Aquí creamos el primer objeto con el título predefinido
-    print(f'Supermercado:{factura1.titulo}\nFecha: {factura1.fecha}')
+#inciamos la instancia
+if __name__ == "__main__":
+    date = datetime.today()
+    factura = Factura(SUPER_NOMBRE, date, productos)
+    print("---------------------------------------------------")
+    print(factura.Create())
