@@ -1,67 +1,86 @@
 import datetime
 
-# Obtiene la fecha y hora actual del día
-def obtener_fecha_hora_actual():
-    fecha_hora_actual = datetime.datetime.now()
-    return fecha_hora_actual
-
 '''
-    Esta clase servirá para trabajar con todos los métodos que usará 
-    un sistema de facturación de una tienda de supermercado.
+Vamos a crear una padre Factira que tendra como atributos el codigo  de barras, el nombre y el precio del producto 
 '''
 class Factura:
     '''
-    Constructor que define los atributos de una factura, como la fecha
-    y el nombre del supermercado. El título se predefinirá como "MEZAFRESH" si no se proporciona.
+    Constructor de la clase Factura que recibe como parametros el codigo de barras, el nombre y el precio del producto
     '''
-    def __init__(self, fecha, titulo="MEZAFRESH"):
-        self.titulo = titulo
-        self.fecha = fecha
-
-'''
-    Clase para gestionar una base de datos de productos
-    con su número de código de barras (UPC), nombre y precio.
-'''
-class Productos:
-    def __init__(self):
-        self.lista_productos = [{'upc': '123456789', 'nombre': 'Arroz', 'precio': 15.99}]
-        self.carrito = []
+    def __init__(self, codigo, nombre, precio):
+        self.codigo = codigo
+        self.nombre = nombre
+        self.precio = precio
 
     '''
-    Esta función agrega productos a una lista de compras. 
-    Solicita al usuario el código de barras del producto, 
-    busca en la lista de productos de la base de datos.
-    Si el producto no está registrado, solicita al usuario 
-    el nombre y el precio para agregarlo a la lista de productos.
+    Creamos el metodo __str__ para poder imprimir los atributos de la clase Factura
     '''
-    def agregar_al_carrito(self, upc):
-        for producto in self.lista_productos:
-            if producto['upc'] == upc:
-                print('Agregado al carrito.')
-                self.carrito.append(producto)
-                return
-
-        print('Producto no encontrado en la base de datos.')
-        nombre = input('Ingresa el nombre del producto: ')
-        precio = float(input('Ingresa el precio del producto: '))
-        nuevo_producto = {'upc': upc, 'nombre': nombre, 'precio': precio}
-        self.lista_productos.append(nuevo_producto)
-        self.carrito.append(nuevo_producto)
-        print('Producto agregado a la base de datos y al carrito.')
-
-if __name__ == '__main__':
-    fecha = obtener_fecha_hora_actual()
-
-    factura1 = Factura(fecha)
-    print(f'Supermercado: {factura1.titulo}\nFecha: {factura1.fecha}')
-
-    producto1 = Productos()
-    while True:
-        upc_usuario = input('Ingresa el UPC del producto a agregar al carrito o escribe "listo" para terminar la compra: ')
-        
-        if upc_usuario.lower() == 'listo':
-            break
-        
-        producto1.agregar_al_carrito(upc_usuario)
+    def __str__(self):
+        return "Codigo: " + str(self.codigo) + " Nombre: " + self.nombre + " Precio: " + str(self.precio)
     
-    print('Carrito:', producto1.carrito)
+    '''
+    Crearemos un metodo para almacenar los datos de los produtos en un diccionario de productos
+    '''
+    def almacenar(self):
+        self.productos = {}
+        self.productos[self.codigo] = [self.nombre, self.precio]
+        return self.productos
+
+    '''
+    Creamos un metodo carrito para poder almacenar los productos que el usuario va a comprar con nombre y precio.
+    Si el producto no esta en el diccionario de productos, se pide el codigo de barras, el nombre y el precio del producto
+    y se agregan al diccionario de productos
+    '''
+    def carrito(self):
+        self.carrito = {}
+        self.codigo = int(input("Ingrese el codigo de barras del producto: "))
+        if self.codigo in self.productos:
+            self.carrito[self.productos[self.codigo][0]] = self.productos[self.codigo][1]
+        else:
+            self.nombre = input("Ingrese el nombre del producto: ")
+            self.precio = float(input("Ingrese el precio del producto: "))
+            self.productos[self.codigo] = [self.nombre, self.precio]
+            self.carrito[self.nombre] = self.precio
+        return self.carrito
+
+    '''
+    Creamos un metodo para poder calcular el total de la compra
+    '''
+    def total(self):
+        self.total = 0
+        for i in self.carrito.values():
+            self.total += i
+        return self.total
+
+    
+#Inicio del programa
+#Agregamos la fecha y hora de la compra
+fecha = datetime.datetime.now()
+print("Fecha: ", fecha)
+print("Bienvenido a Supermercado MezaFresh")
+
+'''
+Pedimos al usuario el codigo de barras y buscamos el producto en el diccionario de productos. De estar en el diccionario
+se agrega al carrito de compras, de lo contario se pide el nombre y el precio del producto y se agrega al diccionario de
+productos y al carrito de compras
+'''
+codigo = int(input("Ingrese el codigo de barras del producto: "))
+nombre = ""
+precio = 0
+productos = {}
+carrito = {}
+total = 0
+while codigo != 0:
+    if codigo in productos:
+        carrito[productos[codigo][0]] = productos[codigo][1]
+    else:
+        nombre = input("Ingrese el nombre del producto: ")
+        precio = float(input("Ingrese el precio del producto: "))
+        productos[codigo] = [nombre, precio]
+        carrito[nombre] = precio
+    codigo = int(input("Ingrese el codigo de barras del producto u seleccione 0 para terminar: "))
+
+#Imprimimos el carrito de compras
+print("Carrito: ", carrito)
+#imprimimos el total de la compra
+print("Total: ", sum(carrito.values()))
