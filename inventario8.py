@@ -22,7 +22,7 @@ class Factura:
     Crearemos un metodo para almacenar los datos de los produtos en un diccionario de productos
     '''
     def almacenar(self):
-        self.productos = {}
+        self.productos = {123: ["Leche", 20.50], 1234: ["Pan", 35.00], 12345: ["Huevo", 25.00], 123456: ["Jamon", 50.00]}
         self.productos[self.codigo] = [self.nombre, self.precio]
         return self.productos
 
@@ -64,13 +64,14 @@ Pedimos al usuario el codigo de barras y buscamos el producto en el diccionario 
 se agrega al carrito de compras, de lo contario se pide el nombre y el precio del producto y se agrega al diccionario de
 productos y al carrito de compras
 '''
-codigo = int(input("Ingrese el codigo de barras del producto: "))
+codigo = (input("Ingrese el codigo de barras del producto: "))
 nombre = ""
 precio = 0
-productos = {}
-carrito = {}
+productos = Factura.almacenar(Factura(0, "", 0))
+carrito = []
 total = 0
-while codigo != 0:
+
+while codigo != '0':
     if codigo in productos:
         carrito[productos[codigo][0]] = productos[codigo][1]
     else:
@@ -78,7 +79,7 @@ while codigo != 0:
         precio = float(input("Ingrese el precio del producto: "))
         productos[codigo] = [nombre, precio]
         carrito[nombre] = precio
-    codigo = int(input("Ingrese el codigo de barras del producto u seleccione 0 para terminar: "))
+    codigo = str(input("Ingrese el codigo de barras del producto o ingrese 0 para terminar: "))
 
 #Imprimimos el carrito de compras
 print("Carrito: ", carrito)
