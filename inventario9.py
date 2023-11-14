@@ -1,4 +1,5 @@
 import datetime
+from time import sleep #Libreria para realizar cuenta regresiva
 
 '''
 Vamos a crear una padre Factura que tendra como atributos el codigo  de barras, el nombre y el precio del producto.
@@ -13,10 +14,10 @@ class Factura:
     '''
     def __init__(self):
         self.productos = {
-            123: ["Leche", 20.50],
-            1234: ["Pan", 35.00],
-            12345: ["Huevo", 25.00],
-            123456: ["Jamon", 50.00]
+            123: ["Leche", 2000],
+            1234: ["Pan", 2100],
+            12345: ["Huevo", 2500],
+            123456: ["Arroz", 3100]
         }
         self.carrito = {}
 
@@ -45,6 +46,7 @@ class Factura:
                 self.carrito[nombre] = [precio, cantidad]
             print("Producto agregado al carrito.")
         else:
+            print("El producto no existe en la base de datos.")
             nombre = input("Ingrese el nombre del producto: ")
             precio = float(input("Ingrese el precio del producto: "))
             self.productos[codigo] = [nombre, precio]
@@ -61,6 +63,7 @@ class Factura:
             precio = valores[0]
             cantidad = valores[1]
             print(f"Producto: {producto}, Precio unitario: {precio}, Cantidad: {cantidad}")
+            sleep(1)
 
     '''
     Metodo para calcular el total de la compra. Se recorre el diccionario de carrito y se calcula el total de la compra
@@ -103,3 +106,4 @@ mostrar el carrito de compras y el total de la compra respectivamente.
 '''
 mi_factura.mostrar_carrito()
 mi_factura.calcular_total()
+print("Gracias por su compra.")
