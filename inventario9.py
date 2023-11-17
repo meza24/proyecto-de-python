@@ -99,6 +99,7 @@ class Factura:
         total = sum(valores[0] * valores[1] for valores in self.carrito.values())
         print('---------------------------')
         print(f"Total a pagar: {total} colones.")
+        print('---------------------------')
 
 '''
 Inicio del programa principal donde se crea un objeto de la clase Factura y se llama a los metodos de la clase
