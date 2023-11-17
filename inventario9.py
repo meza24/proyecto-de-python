@@ -2,7 +2,7 @@ import datetime
 from time import sleep #Libreria para realizar cuenta regresiva
 
 '''
-Vamos a crear una padre Factura que tendra como atributos el codigo  de barras, el nombre y el precio del producto.
+Vamos a crear una clase Factura que tendra como atributos el codigo  de barras, el nombre y el precio del producto.
 '''
 class Factura:
 
