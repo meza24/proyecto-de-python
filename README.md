@@ -12,15 +12,15 @@ Antes de ejecutar el programa, asegúrate de tener las siguientes librerías ins
 
 ## Uso del Programa
 
-1. Ejecución del Script:
+1. **Ejecución del Script**:
     - Ejecuta el script `inventario.py`.
-2. Opciones del Programa:
+2. **Opciones del Programa**:
     - **'imagen'**: Permite escanear códigos de barras desde una imagen.
     - **'manual'**: Permite introducir manualmente el código de barras.
     - **'0'**: Termina el programa.
-3. Instrucciones de Uso:
+3. **Instrucciones de Uso**:
     - Sigue las indicaciones para escanear o introducir manualmente códigos de barras y las cantidades correspondientes.
-4. Resultados:
+4. **Resultados**:
     - El programa mostrará el carrito de compras con los productos agregados y el total a pagar.
 
 ## Funcionalidades Principales
@@ -37,9 +37,3 @@ Antes de ejecutar el programa, asegúrate de tener las siguientes librerías ins
 
 ```bash
 python inventario.py
-
-## Autor
-Axel Meza Mejias 
-
-Correo Electrónico: axel.meza@ucr.ac.cr
-GitHub: https://github.com/meza24/proyecto-de-python.git
