@@ -37,3 +37,9 @@ Antes de ejecutar el programa, asegúrate de tener las siguientes librerías ins
 
 ```bash
 python inventario.py
+
+## Autor
+Axel Meza Mejias 
+
+Correo Electrónico: axel.meza@ucr.ac.cr
+GitHub: https://github.com/meza24/proyecto-de-python.git
