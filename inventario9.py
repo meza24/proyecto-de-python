@@ -51,7 +51,7 @@ class Factura:
             print("El producto ya existe en la base de datos.")
         else:
             self.productos[codigo] = [nombre, precio]
-            print("Producto agregado con éxito.")
+            print("Producto agregado con éxito a la base de datos.")
 
     '''
     Metodo para agregar un producto al carrito de compras. Si el codigo de barras esta en el diccionario de productos
