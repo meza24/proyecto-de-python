@@ -1,39 +1,60 @@
-# Sistema de Facturación con Lectura de Códigos de Barras
+================================================================
+                    CodeSnake SuperStore
+================================================================
 
-Este programa implementa un sistema básico de facturación que permite la lectura de códigos de barras desde imágenes. Utiliza la librería `pyzbar` para decodificar los códigos de barras.
+Este programa proporciona una interfaz gráfica para gestionar un carrito de compras en una tienda utilizando códigos de barras y la lectura de imágenes.
 
-## Instalación de Librerías
+Repositorio:
+El código fuente está disponible en: https://github.com/meza24/proyecto-de-python.git
+Para clonar el repositorio:
+$ git clone https://github.com/meza24/proyecto-de-python.git
 
-Antes de ejecutar el programa, asegúrate de tener las siguientes librerías instaladas en tu entorno de Python:
+Requisitos:
+- Python 3.x
+- Bibliotecas necesarias:
+  - tkinter
+  - OpenCV (cv2)
+  - pyzbar
 
-- **pyzbar**: Para instalar, utiliza el comando `pip install pyzbar` en Windows o `pip3 install pyzbar` en Linux.
-- **datetime**: Para instalar, utiliza el comando `pip install datetime` en Windows o `pip3 install datetime` en Linux.
-- **time**: No es necesario instalarlo, ya que es parte de la biblioteca estándar de Python.
+Instalación de las bibliotecas:
+$ pip install opencv-python-headless pyzbar
 
-## Uso del Programa
+Uso:
+1. Ejecuta el programa utilizando Python con el archivo inventario10.py.
+2. Acciones disponibles:
+   - Agregar productos desde imágenes con códigos de barras.
+   - Agregar productos manualmente ingresando códigos de barras y cantidades.
+   - Mostrar el contenido del carrito de compras.
+   - Calcular el total a pagar.
+   - Visualizar la fecha y hora actual.
 
-1. **Ejecución del Script**:
-    - Ejecuta el script `inventario.py`.
-2. **Opciones del Programa**:
-    - **'imagen'**: Permite escanear códigos de barras desde una imagen.
-    - **'manual'**: Permite introducir manualmente el código de barras.
-    - **'0'**: Termina el programa.
-3. **Instrucciones de Uso**:
-    - Sigue las indicaciones para escanear o introducir manualmente códigos de barras y las cantidades correspondientes.
-4. **Resultados**:
-    - El programa mostrará el carrito de compras con los productos agregados y el total a pagar.
+Ejemplos de Uso:
 
-## Funcionalidades Principales
+- Agregar desde Imagen:
+  - Seleccionar una imagen con un código de barras válido.
+  - Decodificará el código y agregará el producto al carrito.
 
-- **Clase Factura**: Contiene métodos para:
-    - Agregar productos al inventario.
-    - Agregar productos al carrito desde imágenes o manualmente.
-    - Mostrar el contenido del carrito de compras.
-    - Calcular el total a pagar.
-- **Agregar desde Imagen**: Permite la lectura de códigos de barras desde una imagen.
-- **Agregar Manualmente**: Permite la introducción manual de códigos de barras y detalles del producto.
+- Agregar manualmente:
+  - Ingresar el código de barras y la cantidad del producto.
+  - Se añadirá al carrito si el código es válido.
 
-## Ejemplo de Uso
+- Mostrar Carrito:
+  - Visualizará una lista detallada de productos en el carrito, con cantidades y precios.
 
-```bash
-python inventario.py
+- Calcular Total:
+  - Devuelve el monto total a pagar por todos los productos en el carrito.
+
+Funcionalidades Principales:
+
+Factura:
+- Administra la base de datos de productos y el carrito de compras.
+- Métodos para agregar, visualizar y calcular el total de productos.
+- Capacidad para agregar productos desde imágenes con códigos de barras.
+
+InterfazFactura:
+- Crea una interfaz gráfica con tkinter.
+- Interactúa con la clase Factura de manera amigable.
+- Permite agregar productos, visualizar el carrito y obtener el total a pagar.
+
+Autor:
+Desarrollado por Axel Meza Mejias, [Eveling y demás compañeros].
