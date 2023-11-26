@@ -1,46 +1,25 @@
-'''
-En este programa se utiliza la librería pyzbar para leer códigos de barras desde una imagen. 
-Para instalar la librería pyzbar se utiliza el comando pip install pyzbar (en Windows) o pip3 install pyzbar (en Linux).
-Para instalar la librería datetime se utiliza el comando pip install datetime (en Windows) o pip3 install datetime (en Linux).
-Para instalar la librería time se utiliza el comando pip install time (en Windows) o pip3 install time (en Linux).
-'''
+import tkinter as tk
+from tkinter import filedialog
 import cv2 
 from pyzbar.pyzbar import decode 
-import datetime 
-from time import sleep 
+from datetime import datetime
 
-
-'''
-Se crea la clase Factura con los atributos productos y carrito. El atributo productos es un diccionario que contiene
-los productos en el inventario. El atributo carrito es un diccionario que contiene los productos en el carrito de compras.
-'''
 class Factura:
-    '''
-    El metodo __init__ es el constructor de la clase Factura. Se inicializan los atributos productos y carrito. El atributo
-    productos es un diccionario que contiene los productos en el inventario. El atributo carrito es un diccionario que
-    contiene los productos en el carrito de compras. 
-    '''
     def __init__(self):
         self.productos = {
             5901234123457: ["Leche", 2000],
             1234: ["Pan", 2100],
             12345: ["Huevo", 2500],
-            # ... (otros productos)
             222: ["Papel higiénico", 3000]
         }
         self.carrito = {}
 
-    '''
-    El metodo agregar_producto agrega un producto al diccionario de productos. El codigo de barras es la clave y una lista
-    con el nombre y el precio del producto es el valor. Si el codigo de barras ya existe en el diccionario de productos
-    se imprime un mensaje de error, de lo contrario se agrega el producto al diccionario de productos. 
-    '''
     def agregar_producto(self, codigo, nombre, precio):
         if codigo in self.productos:
-            print("El producto ya existe en la base de datos.")
+            return "El producto ya existe en la base de datos."
         else:
             self.productos[codigo] = [nombre, precio]
-            print("Producto agregado con éxito a la base de datos.")
+            return "Producto agregado con éxito a la base de datos."
 
     def agregar_al_carrito(self, codigo, cantidad):
         if codigo in self.productos:
@@ -49,116 +28,138 @@ class Factura:
                 self.carrito[nombre][1] += cantidad
             else:
                 self.carrito[nombre] = [precio, cantidad]
-            print("Producto agregado al carrito.")
+            return "Producto agregado al carrito."
         else:
-            print("El producto no existe en la base de datos.")
-            nombre = input("Ingrese el nombre del producto: ")
-            precio = float(input("Ingrese el precio del producto: "))
-            self.productos[codigo] = [nombre, precio]
-            self.carrito[nombre] = [precio, cantidad]
-            print("Producto agregado al carrito.")
-    
-    '''
-    El metodo mostrar_carrito muestra los productos en el carrito de compras. Se recorre el diccionario de carrito y se
-    imprime el nombre del producto, el precio unitario y la cantidad. 
-    '''
+            return "El producto no existe en la base de datos."
+
     def mostrar_carrito(self):
-        print('---------------------------')
-        print("Carrito de compras:")
+        carrito_texto = '---------------------------\nCarrito de compras:\n'
         for producto, valores in self.carrito.items():
             precio = valores[0]
             cantidad = valores[1]
-            print(f"Producto: {producto}, Precio unitario: {precio}, Cantidad: {cantidad}")
-            sleep(1)
+            carrito_texto += f"Producto: {producto}, Precio unitario: {precio}, Cantidad: {cantidad}\n"
+        return carrito_texto
 
-    '''
-    El metodo calcular_total calcula el total de la compra. Se recorre el diccionario de carrito y se calcula el total
-    de la compra sumando el precio unitario por la cantidad de cada producto. 
-    '''
     def calcular_total(self):
         total = sum(valores[0] * valores[1] for valores in self.carrito.values())
-        print('---------------------------')
-        print(f"Total a pagar: {total} colones.")
-        print('---------------------------')
+        return f'---------------------------\nTotal a pagar: {total} colones.\n---------------------------'
 
-    '''
-    El metodo agregar_desde_imagen agrega un producto al carrito de compras leyendo el codigo de barras desde una imagen. 
-    '''
-    def agregar_desde_imagen(self, ruta_imagen):
-
-        '''Atajo para leer el codigo de barras desde una imagen. Se utiliza la funcion decode de la libreria pyzbar.
-        La funcion decode recibe como parametro una imagen y retorna una lista de objetos decodificados. Cada objeto
-        decodificado es una instancia de la clase Decoded. El atributo data de la clase Decoded contiene el codigo de
-        barras como una cadena de texto.
-        '''
+    def agregar_desde_imagen(self, ruta_imagen, cantidad):
         try:
             imagen = cv2.imread(ruta_imagen)
             decoded_objects = decode(imagen)
             
             if decoded_objects:
-                codigo = decoded_objects[0].data.decode('utf-8')
-                cantidad = int(input("Ingrese la cantidad: "))
-                self.agregar_al_carrito(int(codigo), cantidad)
+                codigo = int(decoded_objects[0].data.decode('utf-8'))
+                return self.agregar_al_carrito(codigo, cantidad)
             else:
-                print("No se encontró ningún código de barras en la imagen.")
-
+                return "No se encontró ningún código de barras en la imagen."
+        except cv2.error as e:
+            return f"Error en OpenCV: {e}"
         except Exception as e:
-            print(f"Error: {e}")
+            return f"Error: {e}"
 
-    '''
-    El metodo agregar_manualmente_al_carrito agrega un producto al carrito de compras introduciendo el codigo de barras
-    manualmente. 
-    '''
-    def agregar_manualmente_al_carrito(self):
-        while True:
+class InterfazFactura:
+    def __init__(self, root):
+
+        
+        self.root = root
+        self.root.title("CodeSnake SuperStore")
+
+        root.configure(bg="#F5F5DC", padx=10, pady=10, relief=tk.RAISED, bd=10, cursor="hand2", highlightcolor="grey", highlightthickness=5)
+        
+        self.mi_factura = Factura()
+
+        self.root.geometry("500x520")
+        self.root.resizable(False, False)
+
+        self.label = tk.Label(root, text="CodeSnake SuperStore", font=('Arial', 20), fg="blue")
+        self.label.pack()
+
+        self.label_fecha = tk.Label(root, text="", font=("Arial", 10), fg="green")
+        self.label_fecha.pack()
+        self.mostrar_fecha_actual()
+
+
+        self.button_imagen = tk.Button(root, text="Agregar desde Imagen", command=self.agregar_desde_imagen)
+        self.button_imagen.pack()
+
+        self.label_codigo = tk.Label(root, text="Código de barras:", fg="red", font=('Arial', 10), bg="#F5F5DC")
+        self.label_codigo.pack()
+
+        self.entry_codigo = tk.Entry(root)
+        self.entry_codigo.pack()
+
+        self.label_cantidad = tk.Label(root, text="Cantidad:", fg="red", font=('Arial', 10), bg="#F5F5DC")
+        self.label_cantidad.pack()
+
+        self.entry_cantidad = tk.Entry(root)
+        self.entry_cantidad.pack()
+
+        self.button_agregar_manualmente = tk.Button(root, text="Agregar Manualmente", command=self.agregar_manualmente)
+        self.button_agregar_manualmente.pack()
+
+        self.carrito_text = tk.Text(root, height=10, width=50, bg="white", fg="black", font=('Arial', 10), wrap=tk.WORD, padx=10, pady=10, bd=5, selectbackground="grey")
+        self.carrito_text.pack()
+
+        self.button_mostrar = tk.Button(root, text="Mostrar Carrito", command=self.mostrar_carrito)
+        self.button_mostrar.pack()
+
+        self.button_total = tk.Button(root, text="Calcular Total", command=self.calcular_total)
+        self.button_total.pack()
+
+        self.button_salir = tk.Button(root, text="Salir", command=root.quit)
+        self.button_salir.pack()
+
+    def agregar_desde_imagen(self):
+        ruta_imagen = filedialog.askopenfilename()
+        cantidad = self.entry_cantidad.get()
+
+        if cantidad:
             try:
-                codigo = int(input("Ingrese el código de barras o '0' para terminar: "))
-
-                if codigo == 0:
-                    break
-
-                if codigo in self.productos:
-                    cantidad = int(input("Ingrese la cantidad: "))
-                    self.agregar_al_carrito(codigo, cantidad)
-                else:
-                    print("El código de barras no existe en la base de datos.")
-                    nombre = input("Ingrese el nombre del producto: ")
-                    precio = float(input("Ingrese el precio del producto: "))
-                    self.agregar_producto(codigo, nombre, precio)
-                    cantidad = int(input("Ingrese la cantidad: "))
-                    self.agregar_al_carrito(codigo, cantidad)
-
+                mensaje = self.mi_factura.agregar_desde_imagen(ruta_imagen, int(cantidad))
+                self.mostrar_mensaje(mensaje)
             except ValueError:
-                print("Ingrese un código de barras válido.")
+                self.mostrar_mensaje("Ingrese una cantidad válida.")
+        else:
+            self.mostrar_mensaje("Ingrese una cantidad.")
 
-# Programa principal donde se crea un objeto de la clase Factura y se llama a los metodos de la clase 
-mi_factura = Factura()
-fecha = datetime.datetime.now()
-print("Fecha: ", fecha)
-print("Bienvenido a Supermercado MezaFresh")
+    def agregar_manualmente(self):
+        codigo = self.entry_codigo.get()
+        cantidad = self.entry_cantidad.get()
 
-'''
-Se inicia un bucle para solicitar código de barras y cantidad hasta que se introduzca '0' para terminar (este es el menu).'''
-while True:
-    opcion = input("Ingrese 'imagen' para escanear desde una imagen, 'manual' para introducir manualmente el código o '0' para terminar: ")
+        if codigo and cantidad:
+            try:
+                codigo_int = int(codigo)
+                cantidad_int = int(cantidad)
+                mensaje = self.mi_factura.agregar_al_carrito(codigo_int, cantidad_int)
+                self.mostrar_mensaje(mensaje)
+            except ValueError:
+                self.mostrar_mensaje("Ingrese un código de barras y cantidad válidos.")
+        else:
+            self.mostrar_mensaje("Ingrese un código de barras y cantidad.")
 
-    if opcion == '0':
-        break
+    def mostrar_carrito(self):
+        carrito_info = self.mi_factura.mostrar_carrito()
+        self.carrito_text.insert(tk.END, carrito_info)
 
-    if opcion == 'imagen':
-        ruta_imagen = input("Ingrese la ruta de la imagen: ")
-        mi_factura.agregar_desde_imagen(ruta_imagen)
+    def calcular_total(self):
+        total_info = self.mi_factura.calcular_total()
+        self.mostrar_mensaje(total_info)
 
-    elif opcion == 'manual':
-        mi_factura.agregar_manualmente_al_carrito()
+    def mostrar_mensaje(self, mensaje):
+        self.carrito_text.delete(1.0, tk.END)
+        self.carrito_text.insert(tk.END, mensaje + '\n')
 
-    else:
-        print("Opción no válida. Ingrese 'imagen', 'manual' o '0' para terminar.")
+    def mostrar_fecha_actual(self):
+        # Obtener la fecha actual y darle un formato legible
+        fecha_actual = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        # Mostrar la fecha en el Label
+        self.label_fecha.config(text=f"Fecha y hora actual: {fecha_actual}")
+        # Actualizar cada segundo (opcional)
+        self.root.after(1000, self.mostrar_fecha_actual)  # Actualiza cada segundo
 
-'''
-Se llama a los metodos mostrar_carrito y calcular_total para mostrar los productos en el carrito de compras y el total
-de la compra. 
-'''
-mi_factura.mostrar_carrito()
-mi_factura.calcular_total()
-print("Gracias por su compra.")
+if __name__ == "__main__":
+    root = tk.Tk()
+    interfaz = InterfazFactura(root)
+    root.mainloop()
