@@ -32,17 +32,6 @@ class Factura:
         self.carrito = {}
 
     '''
-    Método que agrega un producto a la base de datos. Recibe como parámetros el código, el nombre y el precio del producto.
-    Si el código ya existe en la base de datos, retorna un mensaje de error. Si el código no existe, agrega el producto a la base de datos.
-    '''
-    def agregar_producto(self, codigo, nombre, precio):
-        if codigo in self.productos:
-            return "El producto ya existe en la base de datos."
-        else:
-            self.productos[codigo] = [nombre, precio]
-            return "Producto agregado con éxito a la base de datos."
-
-    '''
     Método que agrega un producto al carrito. Recibe como parámetros el código del producto y la cantidad que se desea agregar.
     Si el código existe en la base de datos, agrega el producto al carrito. Si el código no existe, retorna un mensaje de error.
     '''
