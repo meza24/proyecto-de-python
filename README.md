@@ -1,5 +1,5 @@
 ================================================================
-                    Carrito de compras SuperStore
+                    CodeSnake SuperStore
 ================================================================
 
 Este programa proporciona una interfaz gráfica para gestionar un carrito de compras en una tienda utilizando códigos de barras y la lectura de imágenes.
