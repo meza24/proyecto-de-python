@@ -89,7 +89,7 @@ Tutorial:
   - Ingresar el código de barras (números).
   - Oprimir Restar manualmente.
   - Se restará al carrito si el código es válido.
-  - Si el código no es válido, ocurre un error
+  - Si el código no es válido, ocurre el siguiente error
    <img src="ImagenesReadME/RestarManualmenteError.jpg" alt="Primera Imagen" width="350"/>
     
 
