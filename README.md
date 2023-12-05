@@ -40,7 +40,7 @@ Ejemplos de Uso:
 - Agregar desde Imagen:
   - Seleccionar una imagen con un código de barras válido.
     
- <img src="ImagenesReadME/AgregarDesdeImagen.jpg" width="300" height="200">
+ <img src="ImagenesReadME/AgregarDesdeImagen.jpg" width="300" height="500">
 
     
   - Decodificará el código y agregará el producto al carrito.
