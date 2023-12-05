@@ -64,22 +64,46 @@ Tutorial:
   - Seleccionar una imagen con un código de barras válido en formato PNG y que esté dentro de la lista de productos.
   - Oprimir Abrir.
   - Decodificará el código y saldrá un mensaje de que se restó el producto al carrito o un mensaje de que no existe producto en el carrito en caso de que la cantidad ingresada sea mayor a la del carrito.
+ 
+  <div align="center">
+  <img src="ImagenesReadME/RestarDesdeImagen.jpg" alt="Primera Imagen" width="350"/>
+  <img src="ImagenesReadME/RestarDesdeImagen2.jpg" alt="Segunda Imagen" width="350"/>
+</div>
     
 - Agregar manualmente:
   - Ingresar el código de barras (números).
   - Oprimir Agregar manualmente.
   - Se añadirá al carrito si el código es válido.
-    
+ 
+   <div align="center">
+  <img src="ImagenesReadME/AgregarManualmente.jpg" alt="Primera Imagen" width="350"/>
+  <img src="ImagenesReadME/AgregarManualmente2.jpg" alt="Segunda Imagen" width="350"/>
+  <img src="ImagenesReadME/AgregarManualmente3.jpg" alt="Tercera Imagen" width="350"/>
+</div>   
+
+  - Si el código no es válido, ocurre un error
+
+    <img src="ImagenesReadME/AgregarManualmenteError.jpg" alt="Primera Imagen" width="350"/>
+
+
 - Restar manualmente:
   - Ingresar el código de barras (números).
-  - Oprimir Retsar manualmente.
+  - Oprimir Restar manualmente.
   - Se restará al carrito si el código es válido.
+  - Si el código no es válido, ocurre un error
+   <img src="ImagenesReadME/RestarManualmenteError.jpg" alt="Primera Imagen" width="350"/>
+    
 
 - Mostrar Carrito:
   - Visualizará una lista detallada de productos en el carrito, con cantidades y precios.
+    
+ <img src="ImagenesReadME/PrecioTotalCarrito.jpg" alt="Primera Imagen" width="350"/>
+    
 
 - Calcular Total:
   - Devuelve el monto total a pagar por todos los productos en el carrito.
+ 
+  <img src="ImagenesReadME/CalcularTotal.jpg" alt="Primera Imagen" width="350"/>
 
 Funcionalidades Principales:
 
@@ -94,4 +118,4 @@ InterfazFactura:
 - Permite agregar productos, visualizar el carrito y obtener el total a pagar.
 
 Autor:
-Desarrollado por Axel Meza Mejias, Evelyn Feng Wu y demás compañeros.
+Desarrollado por Axel Meza Mejias, Evelyn Feng Wu, Diego José Acosta Obando y Gabriel Porras Salas
