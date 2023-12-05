@@ -78,8 +78,7 @@ Tutorial:
    <div align="center">
   <img src="ImagenesReadME/AgregarManualmente.jpg" alt="Primera Imagen" width="350"/>
   <img src="ImagenesReadME/AgregarManualmente2.jpg" alt="Segunda Imagen" width="350"/>
-  <img src="ImagenesReadME/AgregarManualmente3.jpg" alt="Tercera Imagen" width="350"/>
-</div>   
+   </div>   
 
   - Si el código no es válido, ocurre un error
 
