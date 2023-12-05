@@ -28,6 +28,13 @@ Uso:
    - Calcular el total a pagar.
    - Visualizar la fecha y hora actual.
 
+Pasos para la ejecución desde la terminal:
+Para correr el código desde la terminal se deben seguir los siguientes pasos:
+
+1. Abrir la terminal: Command Prompt en Windows (símbolo de sistema o PowerShell), Terminal en macOS o Linux.
+2. Navegar hasta el directorio donde se encuentra tu archivo Python: usando el comando cd (change directory). Por ejemplo, si tu archivo está en el escritorio y estás en el directorio de inicio, podrías escribir cd Escritorio en Windows.
+3. Ejecutar el archivo de Python: utiliza el comando python seguido del nombre de tu archivo. Por ejemplo, para un archivo llamado mi_script.py, escribe python mi_script.py y presiona Enter. Si estás utilizando Python 3, es posible que necesites escribir python3 en lugar de python. También puedes escribir directamente la versión de Python más el directorio, por ejemplo, python3 /home/usuario1/Descargas/inventario12.py.
+
 Ejemplos de Uso:
 
 - Agregar desde Imagen:
