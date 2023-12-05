@@ -39,6 +39,8 @@ Ejemplos de Uso:
 
 - Agregar desde Imagen:
   - Seleccionar una imagen con un código de barras válido.
+ ![AgregarDesdeImagen1](ImagenesReadME/AgregarDesdeImagen.jpg)
+    
   - Decodificará el código y agregará el producto al carrito.
 
 - Agregar manualmente:
