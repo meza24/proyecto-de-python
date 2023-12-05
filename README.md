@@ -41,9 +41,9 @@ Ejemplos de Uso:
   - Seleccionar una imagen con un código de barras válido.
 
 <div align="center">
-  <img src="ImagenesReadME/AgregarDesdeImagen.jpg" alt="First Image" width="200"/>
-  <img src="ImagenesReadME/DesdeImagen2.jpg" alt="Second Image" width="200"/>
-  <img src="ImagenesReadME/DesdeImagen3.jpg" alt="Third Image" width="200"/>
+  <img src="ImagenesReadME/AgregarDesdeImagen.jpg" alt="Primera Imagen" width="200"/>
+  <img src="ImagenesReadME/DesdeImagen2.jpg" alt="Segunda Imagen" width="200"/>
+  <img src="ImagenesReadME/DesdeImagen3.jpg" alt="Tercera Imagen" width="200"/>
 </div>
 
 
