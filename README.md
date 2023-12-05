@@ -39,8 +39,7 @@ Ejemplos de Uso:
 
 - Agregar desde Imagen:
   - Seleccionar una imagen con un código de barras válido.
-    
- <img src="" width="300" height="500">
+
  <img src="ImagenesReadME/AgregarDesdeImagen.jpg" alt="First Image" width="300" />
 <img src="ImagenesReadME/DesdeImagen2.jpg" alt="Second Image" width="300" />
 
