@@ -52,7 +52,7 @@ Tutorial:
 - Agregar desde Imagen:
   - Seleccionar una imagen con un código de barras válido en formato PNG y que esté dentro de la lista de productos.
   - Oprimir Abrir.
-  - Decodificará el código y saldrá un mensaje de que se agregaró el producto al carrito.
+  - Decodificará el código y saldrá un mensaje de que se restó el producto al carrito o un mensaje de que no existe producto en el carrito en caso de que la cantidad ingresada sea mayor a la del carrito.
 
 <div align="center">
   <img src="ImagenesReadME/AgregarDesdeImagen.jpg" alt="Primera Imagen" width="350"/>
@@ -80,7 +80,7 @@ Tutorial:
   <img src="ImagenesReadME/AgregarManualmente2.jpg" alt="Segunda Imagen" width="350"/>
    </div>   
 
-  - Si el código no es válido, ocurre un error
+  - NOTA: Si el código no es válido, ocurre un error
 
     <img src="ImagenesReadME/AgregarManualmenteError.jpg" alt="Primera Imagen" width="350"/>
 
@@ -95,15 +95,12 @@ Tutorial:
 
 - Mostrar Carrito:
   - Visualizará una lista detallada de productos en el carrito, con cantidades y precios.
-    
- <img src="ImagenesReadME/PrecioTotalCarrito.jpg" alt="Primera Imagen" width="350"/>
-    
 
 - Calcular Total:
   - Devuelve el monto total a pagar por todos los productos en el carrito.
  
   <img src="ImagenesReadME/CalcularTotal.jpg" alt="Primera Imagen" width="350"/>
-
+  <img src="ImagenesReadME/PrecioTotalCarrito.jpg" alt="Primera Imagen" width="350"/>
 Funcionalidades Principales:
 
 Factura:
